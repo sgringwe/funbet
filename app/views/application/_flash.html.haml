@@ -1,0 +1,8 @@
+- if flash
+  - flash.each do |name, message|
+    - if name.to_s == 'alert'
+      .alert.alert-error= message
+    - elsif name.to_s == 'notice'
+      .alert.alert-success= message
+    - else
+      .alert.alert-warning= message
