@@ -43,6 +43,8 @@ GEM
     connection_pool (1.1.0)
     erubis (2.7.0)
     execjs (2.0.1)
+    faraday (0.8.7)
+      multipart-post (~> 1.1)
     haml (4.0.3)
       tilt
     haml-rails (0.4)
@@ -50,7 +52,9 @@ GEM
       activesupport (>= 3.1, < 4.1)
       haml (>= 3.1, < 4.1)
       railties (>= 3.1, < 4.1)
+    hashie (2.0.5)
     hike (1.2.3)
+    httpauth (0.2.0)
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (3.0.4)
@@ -65,6 +69,21 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25)
     multi_json (1.8.0)
+    multipart-post (1.2.0)
+    oauth2 (0.8.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
+    omniauth (1.1.4)
+      hashie (>= 1.2, < 3)
+      rack
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1.0)
+    omniauth-oauth2 (1.1.1)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
     parse_resource (1.8.0)
       activemodel
       activesupport
@@ -147,6 +166,8 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   haml-rails
   jquery-rails
+  omniauth
+  omniauth-facebook
   parse_resource (~> 1.8.0)
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)

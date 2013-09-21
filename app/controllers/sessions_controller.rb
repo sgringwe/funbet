@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+		puts request.env['omniauth.auth']
     user = User.authenticate(params[:username], params[:password])
     # user = User.authenticate("adelevie", "asecretpassword")
     if user
