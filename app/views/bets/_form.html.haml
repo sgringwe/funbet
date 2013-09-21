@@ -1,0 +1,17 @@
+%div
+  = label_tag(:loser_task, 'Loser Task:')
+  = text_field('bet', 'loser_task')
+%div
+  = label_tag(:choice_1, 'First Choice:')
+  = text_field('bet', 'choice_1')
+%div
+  = label_tag(:choice_2, 'Second Choice:')
+  = text_field('bet', 'choice_2')
+%div
+  = label_tag(:complete, 'Complete:')
+  = check_box('bet', 'complete', class: 'inline')
+%div
+  = label_tag(:public, 'Public:')
+  = check_box('bet', 'public', class: 'inline')
+%div
+  = submit_tag('Submit')

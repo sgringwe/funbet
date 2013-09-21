@@ -18,6 +18,7 @@ class BetsController < ApplicationController
 	end
 
 	def create
+		puts params
 		@bet = Bet.new(params[:bet])
 		@bet.save
 		respond_with(@bet)
