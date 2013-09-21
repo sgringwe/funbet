@@ -8,14 +8,21 @@ class UserMailer < ActionMailer::Base
   sendgrid_unique_args :key1 => "value1", :key2 => "value2"
 
   def welcome_message(user)
-    sendgrid_category "Welcome"
-    sendgrid_unique_args :key2 => "newvalue2", :key3 => "value3"
-    mail :to => user.email, :subject => "Welcome #{user.username}"
+    if user and user.email
+      sendgrid_category "Welcome"
+      sendgrid_unique_args :key2 => "newvalue2", :key3 => "value3"
+      mail :to => user.email, :subject => "Welcome #{user.username}"
+    else
+      puts "Failed to send email due to missing email"
+    end
   end
 
   def bet_created_message(bet)
-    puts 'sending to ' + bet.user.email
-    mail to: bet.user.email, subject: "That bet is a hoot!", body: 'Thanks for placing a bet! We will let you know when someone challenges you.'
+    if bet and bet.user and bet.user.email
+      mail to: bet.user.email, subject: "That bet is a hoot!", body: 'Thanks for placing a bet! We will let you know when someone challenges you.'
+    else
+      puts "Failed to send email due to missing email"
+    end
   end
 
 end
