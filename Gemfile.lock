@@ -41,6 +41,7 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     connection_pool (1.1.0)
+    curb (0.7.18)
     erubis (2.7.0)
     execjs (2.0.1)
     faraday (0.8.7)
@@ -164,6 +165,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 3.2.1)
+  curb
   haml-rails
   jquery-rails
   omniauth
