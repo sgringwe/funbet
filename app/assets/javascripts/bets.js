@@ -3,7 +3,7 @@ function UserChoice() {
 	this.bet_id = ko.observable();
 	this.choice = ko.observable();
 	this.verification_file = ko.observable();
-	this.hasDelivered = ko.observable(null);
+	this.hasDelivered = ko.observable(false);
 }
 
 function BetsViewModel() {
@@ -11,8 +11,8 @@ function BetsViewModel() {
 	self.id = ko.observable();
 	self.loser_task = ko.observable();
 	self.start_date = ko.observable();
-	self.isComplete = ko.observable(false);
-	self.isPublic = ko.observable(true);
+	self.outcome = ko.observable(false);
+	self.is_public = ko.observable(true);
 	self.proposition = ko.observable();
 	self.userChoices = ko.observableArray([]);
 	
