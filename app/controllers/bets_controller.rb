@@ -70,7 +70,7 @@ class BetsController < ApplicationController
     bet.outcome = choice
 
     bet.user_choices.each do |user_choice|
-      if user_choice.choice !== choice
+      if !(user_choice.choice === choice)
         user_choice.delivered = false
       end
     end
