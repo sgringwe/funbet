@@ -60,6 +60,11 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.25)
     multi_json (1.8.0)
+    parse_resource (1.8.0)
+      activemodel
+      activesupport
+      json
+      rest-client
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -87,6 +92,8 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -119,6 +126,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   haml-rails
   jquery-rails
+  parse_resource (~> 1.8.0)
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   sqlite3
