@@ -1,8 +1,9 @@
 class User < ParseUser
-  validates_presence_of :username
   attr_accessor :id
 
-  fields :email, :phone
+  fields :email, :phone, :username
+
+  validates_presence_of :username
 
 	def id
 		self.objectId

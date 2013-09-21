@@ -1,7 +1,5 @@
 class Bet < ParseResource::Base
-  fields :id, :loser_task, :outcome, :is_public, :proposition, :owner
-
-  # validates_presence_of :loser_task, :proposition, :owner
+  fields :id, :loser_task, :isComplete, :is_public,	:proposition, :user_id
 
 	def convert_bools!
 		if self.isComplete == '0'
@@ -26,6 +24,6 @@ class Bet < ParseResource::Base
 	end
 
 	def user
-		User.find(self.owner)
+		User.find(self.user_id)
 	end
 end
