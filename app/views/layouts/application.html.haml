@@ -7,7 +7,16 @@
     = csrf_meta_tags
 
   %body
-    .container
-      #main
+    = render 'topbar'
+
+    .grid
+      .col_12
+        .main-header= yield(:page_header)
+      .col_12
         = render partial: 'flash', locals: { flash: flash }
         = yield
+
+    .clear
+    #footer
+      © Copyright 2011–2012 All Rights Reserved. This website was built with
+      %a{href: "http://www.99lime.com"} HTML KickStart
