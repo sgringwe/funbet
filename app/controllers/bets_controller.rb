@@ -17,11 +17,14 @@ class BetsController < ApplicationController
   end
 
   def create
-    # First create and save the bet
-    @bet = Bet.new(params[:bet])
+    # First create ans ave the bet
+    # params[:owner_id] = current_user.id
+    @bet = Bet.create(params[:bet])
 		@bet.convert_bools!
 
 		if @bet.save
+      current_user.bets << @bet
+
 			u = UserChoice.new(user_id: current_user.id, bet_id: @bet.id, choice: true)
 			u.save
 
@@ -32,8 +35,6 @@ class BetsController < ApplicationController
 			sms.deliver
 
 			# Send a simple email
-			puts 'bet user id is'
-			puts @bet.user_id
 			msg = UserMailer.bet_created_message(@bet)
 			msg.deliver!
 

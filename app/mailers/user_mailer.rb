@@ -18,8 +18,8 @@ class UserMailer < ActionMailer::Base
   end
 
   def bet_created_message(bet)
-    if bet and bet.user and bet.user.email
-      mail to: bet.user.email, subject: "That bet is a hoot!", body: 'Thanks for placing a bet! We will let you know when someone challenges you.'
+    if bet and bet.owner and bet.owner.email
+      mail to: bet.owner.email, subject: "That bet is a hoot!", body: 'Thanks for placing a bet! We will let you know when someone challenges you.'
     else
       puts "Failed to send email due to missing email"
     end

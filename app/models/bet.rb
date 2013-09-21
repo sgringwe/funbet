@@ -1,5 +1,7 @@
 class Bet < ParseResource::Base
-	fields :id, :loser_task, :outcome, :is_public, :proposition, :user_id
+	fields :id, :loser_task, :outcome, :is_public, :proposition
+
+	belongs_to :owner, :class_name => 'User'
 
 	def convert_bools!
 		if self.outcome == '0'
@@ -25,9 +27,5 @@ class Bet < ParseResource::Base
 
 	def user_choices
 		UserChoice.where(bet_id: self.id)
-	end
-
-	def owner
-		User.find(self.user_id)
 	end
 end

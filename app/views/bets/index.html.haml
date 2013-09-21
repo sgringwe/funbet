@@ -1,16 +1,19 @@
 - if @bets
-  %table
-    %tr
-      %th Combatants
-      %th Loser Task
-      %th Edit
-      %th Destroy
-    - @bets.each do |bet|
-      %tr
-        %td= bet.users.map { |u| u.username }.join(', ')
-        %td= link_to bet.loser_task, bet_path(bet.id)
-        %td= link_to 'Edit', edit_bet_path(bet.id)
-        %td= link_to 'Destroy', bet_path(bet.id), method: 'delete'
+  / %table
+  /   %tr
+  /     %th Combatants
+  /     %th Loser Task
+  /     %th Edit
+  /     %th Destroy
+  /   - @bets.each do |bet|
+  /     %tr
+  /       %td= bet.users.map { |u| u.username }.join(', ')
+  /       %td= link_to bet.loser_task, bet_path(bet.id)
+  /       %td= link_to 'Edit', edit_bet_path(bet.id)
+  /       %td= link_to 'Destroy', bet_path(bet.id), method: 'delete'
+
+  - @bets.each do |bet|
+    = render 'bets_partial', bet: bet
 
 %div
   = link_to 'New Bet', new_bet_path, class: 'button'
