@@ -1,5 +1,9 @@
-= form_tag(users_path, method: 'post') do
-	= text_field_tag(:username)
-	= password_field_tag(:pwd)
-	= submit_tag('Submit')
+= form_tag(users_path, method: 'post', class: 'vertical') do
+  = label_tag('user[username]', 'Username:')
+  = text_field('user', 'username')
+  = label_tag('user[password]', 'Password:')
+  = password_field('user', 'password')
+  = label_tag('user[password_confirmation]', 'Password Confirmation:')
+  = password_field('user', 'password_confirmation')
+  = submit_tag('Submit')
 

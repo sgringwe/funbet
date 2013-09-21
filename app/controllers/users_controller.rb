@@ -1,11 +1,20 @@
 class UsersController < ApplicationController
 	respond_to :html
+
 	def new
-                respond_with(@new) # create a user
-		user = User.new(:username => params[:username])
-		user.password = params[:pwd]
-		user.save #=> true
+		@user = User.new
+		respond_with(@user) # create a user
 	end
-	# # after saving, the password is automatically hashed by Parse's server user.password will return the unhashed password when the original 
-    	# # object is in memory from a new session, User.where(:username => "adelevie").first.password will return nil check if a user is logged in
+
+	def create
+		if params[:user][:password] != params[:user][:password_confirmation]
+			flash[:error] = 'Passwords do not match'
+			@user = User.new(params[:user])
+			render 'new'
+		else
+			user = User.new(params[:user])
+			user.save
+			redirect_to root_path
+		end
+	end
 end
