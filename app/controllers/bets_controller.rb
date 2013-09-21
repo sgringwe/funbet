@@ -45,4 +45,15 @@ class BetsController < ApplicationController
     bet.destroy
 		redirect_to bets_path
   end
+
+  # 'Joins' a bet. If passed choice=True, joins the 'For side'
+  def challenge
+    @challenge = UserChoice.new
+    @challenge.bet_id = params[:bet_id]
+    @challenge.user_id = current_user.id
+    @challenge.choice = params[:choice]
+    @challenge.save
+  end
+
+
 end

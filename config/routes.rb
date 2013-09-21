@@ -11,6 +11,8 @@ Funbet::Application.routes.draw do
   resources :users
   get 'register' => 'users#new', as: :register
 
-	resources :bets
-	resources :users
+  resources :bets do
+    post 'challenge/:choice' => 'bets#challenge', as: :challenge
+  end
+
 end
