@@ -12,6 +12,7 @@ gem 'haml-rails'
 gem "parse_resource", "~> 1.8.0"
 
 gem "twilio-ruby"
+gem "sendgrid"
 
 # Gems used only for assets and not required
 # in production environments by default.
