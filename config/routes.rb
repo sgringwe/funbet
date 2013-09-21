@@ -9,4 +9,5 @@ Funbet::Application.routes.draw do
   resources :users
 
 	resources :bets
+	resources :users
 end
