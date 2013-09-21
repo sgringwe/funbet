@@ -13,7 +13,7 @@
   /       %td= link_to 'Destroy', bet_path(bet.id), method: 'delete'
 
   - @bets.each do |bet|
-    = render 'bets_partial', bet: bet
+    = render 'bet_partial', bet: bet
 
 %div
   = link_to 'New Bet', new_bet_path, class: 'button'

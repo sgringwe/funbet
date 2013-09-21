@@ -5,3 +5,34 @@
 .width300 {
   width: 300px;
 }
+
+.bolded {
+  font-weight: bold;
+}
+
+.bet {
+  .agree-side, .disagree-side {
+    width: 200px;
+    float: left;
+
+    img {
+      width: 180px;
+    }
+
+    &.disagree-side {
+      float: right;
+    }
+  }
+
+  .content {
+    float: left;
+
+    .proposition-main {
+      font-size: 32px;
+    }
+
+    .loser-task-main {
+      font-size: 26px;
+    }
+  }
+}
