@@ -22,6 +22,9 @@
         %span.bolded Loser Requirement:
         %span= bet.loser_task
     %td.disagree-side
-      = link_to bet.owner do
-        = image_tag '/assets/default_user.jpg', width: '200px', class: 'img-thumbnail'
-      %p= "Owner: #{bet.owner.username}"
+      -if bet.disagreeing_choices.empty?
+        %p= "CHALLENGE"
+      -else 
+        = link_to bet.disagreeing_choices[0].user do
+          = image_tag '/assets/default_user.jpg', width: '200px', class: 'img-thumbnail'
+        %p= "Owner: #{bet.disagreeing_choices[].user.username}"
