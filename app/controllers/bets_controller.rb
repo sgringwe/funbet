@@ -16,11 +16,6 @@ class BetsController < ApplicationController
 		respond_with(@bet)
   end
 
-  def edit
-    @bet = Bet.find(params[:id])
-		respond_with(@bet)
-  end
-
   def create
     params[:user_id] = current_user.id
     @bet = Bet.new(params[:bet])
@@ -28,14 +23,6 @@ class BetsController < ApplicationController
 		@bet.convert_bools!
 		@bet.save
 		redirect_to bets_path
-    BetCreatedWorker.perform_async(@bet.id)
-  end
-
-  def update
-    @bet = Bet.find(params[:id])
-    @bet.update_attributes(params[:bet])
-		@bet.convert_bools!
-		respond_with(@bet)
   end
 
   def destroy
