@@ -1,5 +1,5 @@
 class UserChoice < ParseResource::Base
-	fields :user_id, :bet_id, :choice, :verification_file, :hasDelivered
+	fields :user_id, :bet_id, :choice, :verification_file, :has_delivered
 
 	validates_presence_of :user_id, :bet_id, :choice
 
