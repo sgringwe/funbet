@@ -14,7 +14,8 @@ class UsersController < ApplicationController
 		else
 			user = User.new(params[:user])
 			user.save
-			redirect_to root_path
+			flash[:success] = 'Successfully registered'
+			redirect_to login_path
 		end
 	end
 end

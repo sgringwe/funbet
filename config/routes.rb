@@ -7,6 +7,7 @@ Funbet::Application.routes.draw do
   get 'logout' => 'sessions#destroy', as: :logout
 
   resources :users
+  get 'register' => 'users#new', as: :register
 
 	resources :bets
 	resources :users

@@ -1,9 +1,11 @@
-= form_tag(users_path, method: 'post', class: 'vertical') do
-  = label_tag('user[username]', 'Username:')
-  = text_field('user', 'username')
-  = label_tag('user[password]', 'Password:')
-  = password_field('user', 'password')
-  = label_tag('user[password_confirmation]', 'Password Confirmation:')
-  = password_field('user', 'password_confirmation')
-  = submit_tag('Submit')
-
+= form_for @user, html: { class: 'form-horizontal' } do |f|
+  .form-group
+    = f.label :username, 'Username'
+    = f.text_field :username, class: 'form-control width300', placeholder: 'Username'
+  .form-group
+    = f.label :password, 'Password'
+    = f.password_field :password, class: 'form-control width300', placeholder: 'Password'
+  .form-group
+    = f.label :password_confirmation, 'Password Confirmation'
+    = f.password_field :password_confirmation, class: 'form-control width300', placeholder: 'Password Confirmation'
+  = f.submit "Register", class: 'btn btn-primary'
