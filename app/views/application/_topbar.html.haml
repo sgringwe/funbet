@@ -19,6 +19,7 @@
 
 
         %ul.nav.navbar-nav.pull-right.topmenu
+          %li= link_to 'My Account', edit_user_path(current_user)
           %li= link_to 'Log Out', logout_path
     - else
       %ul.nav.navbar-nav

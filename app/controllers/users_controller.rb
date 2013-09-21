@@ -6,6 +6,11 @@ class UsersController < ApplicationController
 		respond_with(@user) # create a user
 	end
 
+	def edit
+		@user = User.find(params[:id])
+		respond_with(@user) # Edit user account
+	end
+
 	def create
 		if params[:user][:password] != params[:user][:password_confirmation]
 			flash[:error] = 'Passwords do not match'
