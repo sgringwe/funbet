@@ -1,6 +1,8 @@
 class BetsController < ApplicationController
 	respond_to :html
 
+	before_filter :authenticate_user!
+
   def index
     @bets = Bet.all
 		respond_with(@bets)

@@ -17,12 +17,20 @@ class SessionsController < ApplicationController
 					.strftime("%Y-%m-%dT%I:%M:%S.000Z")
 			}}}
 
-			uri = 'https://api.parse.com/1/users'
+			if current_user
+				uri = "https://api.parse.com/1/users/#{current_user.id}"
+			else
+				uri = 'https://api.parse.com/1/users'
+			end
 			c = Curl::Easy.new(uri)
 			c.headers['X-Parse-Application-Id'] = '0iy7OGpbCzG28sXgOsHbPxEg8ifTKNUzSR4rshIz'
 			c.headers['X-Parse-REST-API-Key'] = 'x2qJ5VmWfR9vzmJRxVQjYhfNncd851N8aJxrapwQ'
 			c.headers['Content-Type'] = 'application/json'
-			c.http_post(obj.to_json)
+			if current_user
+				c.http_post(obj.to_json)
+			else
+				c.http_put(obj.to_json)
+			end
 
 			json = JSON.parse(c.body_str)
 			if json.username
