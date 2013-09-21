@@ -11,42 +11,15 @@
         %span.icon-bar
         %span.icon-bar
       = link_to root_url, class: 'navbar-brand branding brand' do
-        = image_tag('/assets/logo2.png')
+        %span Betly.io
       .navbar-collapse.collapse.main-nav-collapse
         %ul.nav.navbar-nav
-          .global-search-wrapper
-            %input#global-search.twitter-typeahead.typeahead{ type: "text", placeholder: 'Type to Search...'}
-        %ul.nav.navbar-nav
-          / %li= nav_link 'Jobs', jobs_path
+          %li= link_to 'Bets', bets_path
 
 
 
-          - if current_user
-            = link_to 'Bets', bets_path
-
-
-
-        / %ul.nav.navbar-nav.pull-right.topmenu
-        /   %li.has-sub
-        /     = link_to user_path(current_user) do
-        /       / = "#{current_user.name}"
-        /       = current_user.first_name
-        /       - if current_user.unread_messages.count + current_user.unseen_notifications.count > 0
-        /         %span.badge.badge-info= current_user.unread_messages.count + current_user.unseen_notifications.count
-        /     %ul
-        /       %li= link_to current_user.institution_name, current_user.institution
-        /       %li
-        /         = link_to conversations_path do
-        /           Messages
-        /           - if current_user.unread_messages.count > 0
-        /             %span.badge.badge-info= current_user.unread_messages.count
-        /       %li
-        /         = link_to notifications_path do
-        /           Notifications
-        /           - if current_user.unseen_notifications.count > 0
-        /             %span.badge.badge-info= current_user.unseen_notifications.count
-        /       / %li.divider
-        /       %li= link_to 'Sign Out', logout_path
+        %ul.nav.navbar-nav.pull-right.topmenu
+          %li= link_to 'Log Out', logout_path
     - else
       %ul.nav.navbar-nav
         %li= link_to "Login", login_path

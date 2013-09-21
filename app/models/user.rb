@@ -1,5 +1,6 @@
 class User < ParseUser
   validates_presence_of :username
+  attr_accessor :id
 
   fields :email
 
