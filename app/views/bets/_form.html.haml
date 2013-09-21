@@ -1,17 +1,11 @@
-%div
-  = label_tag(:loser_task, 'Loser Task:')
-  = text_field('bet', 'loser_task')
-%div
-  = label_tag(:choice_1, 'First Choice:')
-  = text_field('bet', 'choice_1')
-%div
-  = label_tag(:choice_2, 'Second Choice:')
-  = text_field('bet', 'choice_2')
-%div
-  = label_tag(:complete, 'Complete:')
-  = check_box('bet', 'complete', class: 'inline')
-%div
-  = label_tag(:public, 'Public:')
-  = check_box('bet', 'public', class: 'inline')
-%div
-  = submit_tag('Submit')
+= form_for @bet, class: 'form-horizontal' do |f|
+  .form-group
+    = f.label :proposition
+    = f.text_area :proposition, class: 'form-control width300', rows: 4, placeholder: 'What you propose'
+  .form-group
+    = f.label :loser_task
+    = f.text_area :loser_task, class: 'form-control width300', rows: 4, placeholder: 'Task that the user must do'
+  .form-group
+    = f.label :public, 'I want this bet to be public to anyone'
+    = f.check_box :public, class: 'form-control'
+  = f.submit 'Bet', class: 'btn btn-primary'

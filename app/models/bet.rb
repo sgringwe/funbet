@@ -1,8 +1,8 @@
 class Bet < ParseResource::Base
-  fields :id, :loser_task, :start_date, :complete, :public, :winning_choice,
-		:choice_1, :choice_2
+  fields :id, :loser_task, :start_date, :complete, :public, :is_true,
+		:proposition, :user_id
 
-  validates_presence_of :loser_task, :choice_1, :choice_2
+  # validates_presence_of :loser_task, :proposition, :user_id
 
 	def convert_bools!
 		if self.complete == '0'
@@ -24,5 +24,9 @@ class Bet < ParseResource::Base
 
 	def users
 		UserChoice.where(bet_id: self.id).map { |uc| uc.user }
+	end
+
+	def user
+		User.find(self.user_id)
 	end
 end

@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 			@user = User.new(params[:user])
 			render 'new'
 		else
+			params.delete(:password_confirmation)
 			user = User.new(params[:user])
 			user.save
 			flash[:success] = 'Successfully registered'

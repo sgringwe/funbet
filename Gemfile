@@ -9,10 +9,15 @@ gem 'sqlite3'
 
 gem 'haml-rails'
 
+# Parse.com integration
 gem "parse_resource", "~> 1.8.0"
 
+# SMS and email
 gem "twilio-ruby"
 gem "sendgrid"
+
+# Threading
+gem 'sidekiq'
 
 # Gems used only for assets and not required
 # in production environments by default.

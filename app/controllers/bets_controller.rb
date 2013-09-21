@@ -22,7 +22,9 @@ class BetsController < ApplicationController
   end
 
   def create
+    params[:user_id] = current_user.id
     @bet = Bet.new(params[:bet])
+    puts params[:bet]
 		@bet.convert_bools!
 		@bet.save
 		redirect_to bets_path
