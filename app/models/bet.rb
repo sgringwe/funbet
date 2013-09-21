@@ -23,7 +23,11 @@ class Bet < ParseResource::Base
 		UserChoice.where(bet_id: self.id).map { |uc| uc.user }
 	end
 
-	def user
+	def user_choices
+		UserChoice.where(bet_id: self.id)
+	end
+
+	def owner
 		User.find(self.user_id)
 	end
 end
