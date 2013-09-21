@@ -14,7 +14,13 @@ function BetsViewModel() {
 	self.isComplete = ko.observable(false);
 	self.isPublic = ko.observable(true);
 	self.proposition = ko.observable();
-
-	self.userChoice = new UserChoice()
+	self.userChoices = ko.observableArray([]);
+	
+	self.addUserChoices = function() {
+		self.userChoices.push(new UserChoice());
+	};
+	self.removeUserChoices = function(UserChoice) {
+		self.userChoices.remove(UserChoice);
+	};
 }
 ko.applyBindings(new BetsViewModel());

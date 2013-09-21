@@ -1,1 +1,11 @@
-#Bets partial : blah vs Blah : challenge : loser will;
+%head
+	%title
+		Betting Page
+%body
+	%a{ data: { bind: 'foreach: userChoices' } }
+		%a{ data: { bind: 'text: user_id' } }
+		%a{ data: { bind: 'text: choice' } }	
+
+	%a{ data: { bind: 'text: challenge' } }
+	%a{ data: { bind: 'text: loser_task' } }
+		
