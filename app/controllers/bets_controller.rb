@@ -1,26 +1,43 @@
 class BetsController < ApplicationController
 	respond_to :html
 
-	def index
-		@bets = Bet.all
+  def index
+    @bets = Bet.all
 		respond_with(@bets)
-	end
+  end
 
-	def show
-		puts params
-		@bet = Bet.find(params[:id])
+  def show
+    @bet = Bet.find(params[:id])
 		respond_with(@bet)
-	end
+  end
 
-	def new
-		@bet = Bet.new
+  def new
+    @bet = Bet.new
 		respond_with(@bet)
-	end
+  end
 
-	def create
-		puts params
-		@bet = Bet.new(params[:bet])
+  def edit
+    @bet = Bet.find(params[:id])
+		respond_with(@bet)
+  end
+
+  def create
+    @bet = Bet.new(params[:bet])
+		@bet.convert_bools!
 		@bet.save
+		redirect_to bets_path
+  end
+
+  def update
+    @bet = Bet.find(params[:id])
+    @bet.update_attributes(params[:bet])
+		@bet.convert_bools!
 		respond_with(@bet)
-	end
+  end
+
+  def destroy
+    bet = Bet.find(params[:id])
+    bet.destroy
+		redirect_to bets_path
+  end
 end

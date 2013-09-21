@@ -8,4 +8,8 @@ class User < ParseUser
 
   # but note that email is a special field in the Parse API.
   fields :email
+
+	def id
+		self.objectId
+	end
 end

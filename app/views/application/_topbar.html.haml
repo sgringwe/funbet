@@ -1,42 +1,4 @@
 / Menu Horizontal
 %ul.menu
   %li.current
-    %a{href: ""} Item 1
-  %li
-    %a{href: ""} Item 2
-  %li
-    %a{href: ""}
-      %span.icon{"data-icon" => "R"}>
-      Item 3
-    %ul
-      %li
-        %a{href: ""}
-          %span.icon{"data-icon" => "G"}>
-          Sub Item
-      %li
-        %a{href: ""}
-          %span.icon{"data-icon" => "A"}>
-          Sub Item
-        %ul
-          %li
-            %a{href: ""}
-              %span.icon{"data-icon" => "Z"}>
-              Sub Item
-          %li
-            %a{href: ""}
-              %span.icon{"data-icon" => "k"}>
-              Sub Item
-          %li
-            %a{href: ""}
-              %span.icon{"data-icon" => "J"}>
-              Sub Item
-          %li
-            %a{href: ""}
-              %span.icon{"data-icon" => "="}>
-              Sub Item
-      %li.divider
-        %a{href: ""}
-          %span.icon{"data-icon" => "T"}>
-          li.divider
-  %li
-    %a{href: ""} Item 4
+    = link_to 'Bets', bets_path
