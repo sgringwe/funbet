@@ -62,4 +62,18 @@ class BetsController < ApplicationController
     @challenge.choice = params[:choice]
     @challenge.save
   end
+
+  def complete
+    choice = params[:choice]
+    bet = Bet.find(params[:id])
+    
+    bet.outcome = choice
+
+    bet.user_choices.each do |user_choice|
+      if user_choice.choice !== choice
+        user_choice.delivered = false
+      end
+    end
+  end
+
 end

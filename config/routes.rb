@@ -13,6 +13,7 @@ Funbet::Application.routes.draw do
 
   resources :bets do
     post 'challenge/:choice' => 'bets#challenge', as: :challenge
+    post 'complete/:choice' => 'bets#complete', as: :complete
   end
 
 end
