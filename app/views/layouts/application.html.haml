@@ -8,15 +8,8 @@
 
   %body
     = render 'topbar'
-
-    .grid
-      .col_12
-        .main-header= yield(:page_header)
-      .col_12
+    .main-header= yield(:page_header)
+    .container
+      #main{style: 'margin-top: 30px;'}
         = render partial: 'flash', locals: { flash: flash }
         = yield
-
-    .clear
-    #footer
-      © Copyright 2011–2012 All Rights Reserved. This website was built with
-      %a{href: "http://www.99lime.com"} HTML KickStart
