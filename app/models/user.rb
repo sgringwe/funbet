@@ -8,4 +8,8 @@ class User < ParseUser
 	def id
 		self.objectId
 	end
+
+	def bets
+		UserChoice.where(user_id: self.id).map { |uc| uc.bet }
+	end
 end
