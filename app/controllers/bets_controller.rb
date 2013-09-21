@@ -28,6 +28,7 @@ class BetsController < ApplicationController
 		@bet.convert_bools!
 		@bet.save
 		redirect_to bets_path
+    BetCreatedWorker.perform_async(@bet.id)
   end
 
   def update
