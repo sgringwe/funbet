@@ -12,7 +12,8 @@ Funbet::Application.routes.draw do
   get 'register' => 'users#new', as: :register
 
   resources :bets do
-    post 'challenge/:choice' => 'bets#challenge', as: :challenge
+    post 'agree/:choice' => 'bets#agree', as: :agree
+    post 'disagree/:choice' => 'bets#disagree', as: :disagree
     post 'complete/:choice' => 'bets#complete', as: :complete
   end
 

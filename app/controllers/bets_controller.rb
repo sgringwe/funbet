@@ -54,15 +54,6 @@ class BetsController < ApplicationController
 		redirect_to bets_path
   end
 
-  # 'Joins' a bet. If passed choice=True, joins the 'For side'
-  def challenge
-    @challenge = UserChoice.new
-    @challenge.bet_id = params[:bet_id]
-    @challenge.user_id = current_user.id
-    @challenge.choice = params[:choice]
-    @challenge.save
-  end
-
   def complete
     choice = params[:choice]
     bet = Bet.find(params[:id])
@@ -74,6 +65,16 @@ class BetsController < ApplicationController
         user_choice.delivered = false
       end
     end
+  end
+
+  def agree
+    u = UserChoice.new(user_id: current_user.id, bet_id: @bet.id, choice: true)
+    u.save
+  end
+
+  def disagree
+    u = UserChoice.new(user_id: current_user.id, bet_id: @bet.id, choice: false)
+    u.save
   end
 
 end

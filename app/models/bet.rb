@@ -19,6 +19,10 @@ class Bet < ParseResource::Base
 		self.objectId
 	end
 
+	def agreeing_choices
+		user_choices.where(choice: true)
+	end
+
 	def disagreeing_choices
 		user_choices.where(choice: false)
 	end
