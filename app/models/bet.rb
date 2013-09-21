@@ -19,8 +19,12 @@ class Bet < ParseResource::Base
 		self.objectId
 	end
 
+	def disagreeing_choices
+		user_choices.where(choice: false)
+	end
+
 	def users
-		UserChoice.where(bet_id: self.id).map { |uc| uc.user }
+		user_choices.map { |uc| uc.user }
 	end
 
 	def user_choices
