@@ -5,24 +5,23 @@
 / %a{ data: { bind: 'text: challenge' } }
 / %a{ data: { bind: 'text: loser_task' } }
 
-
-.row.bet
-  .col-md-12
-    .agree-side
+%table.bet
+  %tr
+    %td.agree-side
       = link_to bet.owner do
         = image_tag '/assets/default_user.jpg', width: '200px', class: 'img-thumbnail'
       %p= "Owner: #{bet.owner.username}"
       / - bet.user_choices.each do |user_choice|
       /   - if user_choice.choice
       /     %p= user_choice.user.username
-    .content
+    %td
       %p.proposition-main
         %span.bolded Proposition:
         %span= bet.proposition
-      %p.loser-task-main
+      %p.loser-task-main  
         %span.bolded Loser Requirement:
         %span= bet.loser_task
-    .disagree-side
+    %td.disagree-side
       = link_to bet.owner do
         = image_tag '/assets/default_user.jpg', width: '200px', class: 'img-thumbnail'
       %p= "Owner: #{bet.owner.username}"
