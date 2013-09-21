@@ -1,5 +1,5 @@
 class Bet < ParseResource::Base
-  fields :id, :loser_task, :isComplete, :is_public,	:proposition, :user_id
+	fields :id, :loser_task, :outcome, :is_public, :proposition, :user_id
 
 	def convert_bools!
 		if self.isComplete == '0'
