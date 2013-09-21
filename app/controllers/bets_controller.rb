@@ -21,12 +21,14 @@ class BetsController < ApplicationController
   def create
     # First create ans ave the bet
     # params[:owner_id] = current_user.id
-    @bet = Bet.create(params[:bet])
+    @bet = Bet.new
+    @bet.proposition = params[:bet][:proposition]
+    @bet.loser_task = params[:bet][:loser_task]
+    @bet.is_public = params[:bet][:is_public]
+    @bet.owner_id = current_user.id
 		@bet.convert_bools!
 
 		if @bet.save
-      current_user.bets << @bet
-
 			u = UserChoice.new(user_id: current_user.id, bet_id: @bet.id, choice: true)
 			u.save
 
