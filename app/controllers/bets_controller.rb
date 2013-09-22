@@ -134,10 +134,28 @@ class BetsController < ApplicationController
   end
 
   def upload_verification
-    bet = Bet.find(params[:bet_id])
-    @user_choice = UserChoice.where(bet_id: bet.id, user_id: current_user.id).first
-    @user_choice.verification_file = params[:bet][:verification_file]
-    @user_choice.save
+    @bet = Bet.find(params[:bet_id])
+    @user_choice = UserChoice.where(bet_id: @bet.id, user_id: current_user.id).first
+    file = params[:bet][:verification_file]
+    result = Bet.upload(file.tempfile, file.original_filename, content_type: file.content_type)
+    @user_choice.verification_file = {"name" => result["name"], "__type" => "File"}
+    @user_choice.has_delivered = true
+    s = @user_choice.save
+
+    # Let everyone know
+    bet.user_choices.each do |user_choice|
+      # Send a simple sms notificatin to initialize the feedback loop
+      sms = Sms.new
+      sms.to_user = user_choice.user
+      sms.content = "Hilarious! #{user_choice.user.username} has uploaded a photo executing his loser task. Check it out."
+      sms.deliver
+
+      # Send a simple email
+      msg = UserMailer.verification_added_message(user_choice)
+      msg.deliver!
+    end
+
+    redirect_to @bet
   end
 
 end

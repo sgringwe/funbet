@@ -29,7 +29,10 @@
         - if !(choice === nil)
           - if choice.choice != bet.outcome && !(bet.outcome === nil)
             %p You lost! 
-            = link_to 'Prove you followed through.', bet_verify_path(bet), method: :get
+            - if not choice.has_delivered
+              = link_to 'Prove you followed through.', bet_verify_path(bet), method: :get
+          - elsif choice.choice == bet.outcome && !(bet.outcome === nil)
+            %p You won!
         %p.proposition-main
           %span.bolded= "#{bet.owner.username.capitalize} bets:"
           = link_to bet.proposition, bet

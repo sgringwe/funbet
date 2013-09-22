@@ -49,4 +49,12 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  def verification_added_message(user_choice)
+    if user_choice and user_choice.bet and user_choice.user and user_choice.user.email and not user_choice.user.email.empty?
+      mail to: user_choice.user.email, subject: "You've got to see this!", body: "#{user_choice.user.username} did what they had to! See them #{user_choice.bet.loser_task}."
+    else
+      puts "Failed to send email due to missing email"
+    end
+  end
+
 end
