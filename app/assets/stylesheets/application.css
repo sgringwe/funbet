@@ -12,3 +12,7 @@
  *= require_bootstrap
  *= require_tree .
  */
+
+body #main{
+    font-family: serif;
+}

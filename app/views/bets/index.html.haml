@@ -14,6 +14,7 @@
 
   - @bets.each do |bet|
     = render 'bet_partial', bet: bet
+    %div.divider
 
 %div
-  = link_to 'New Bet', new_bet_path, class: 'button'
+  = link_to 'Challenge your friends!', new_bet_path
