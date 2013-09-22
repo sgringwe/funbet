@@ -1,0 +1,14 @@
+.bet-details.row.margin-top
+  - if current_user.id == bet.owner.id and bet.betting_finished and not [true, false].include?(bet.outcome)
+    %a.btn.btn-primary(data-toggle="modal" href="#complete-modal") Enter Outcome
+
+.modal.fade#complete-modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close(data-dismiss="modal" aria-hidden="true") &times;
+        %h4.modal-title How'd it turn out?
+      .modal-body
+        / = link_to 'I was correct', complete_bet_path(bet, {correct: 'yes'}), method: :post, class: 'btn btn-success pull-right'
+        %a.btn.btn-success.pull-right(data-method="post" href="#{bet_complete_path(bet, {choice: true})}") I was correct
+        %a.btn.btn-danger(data-method="post" href="#{bet_complete_path(bet, {choice: false})}") I was incorrect

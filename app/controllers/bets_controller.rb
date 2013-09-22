@@ -35,7 +35,7 @@ class BetsController < ApplicationController
 			# Send a simple sms notificatin to initialize the feedback loop
 			sms = Sms.new
 			sms.to_user = current_user
-			sms.content = 'What a fun bet! We will let you who the fool is to challenge your amazing foresight.'
+			sms.content = 'What a fun bet! We will let you know who the fool is to challenge your amazing foresight.'
 			sms.deliver
 
 			# Send a simple email
@@ -55,16 +55,40 @@ class BetsController < ApplicationController
   end
 
   def complete
-    choice = params[:choice]
-    bet = Bet.find(params[:id])
+    choice = if params[:choice] == 'true' then true else false end
+    bet = Bet.find(params[:bet_id])
     
     bet.outcome = choice
+    bet.convert_bools!
+    bet.save
 
     bet.user_choices.each do |user_choice|
-      if !(user_choice.choice === choice)
-        user_choice.delivered = false
+      if user_choice.choice != bet.outcome
+        user_choice.has_delivered = false
+
+        # Send a simple sms notificatin to initialize the feedback loop
+        sms = Sms.new
+        sms.to_user = user_choice.user
+        sms.content = "Uh oh! Looks like you lost the #{bet.proposition} bet. Go to betly.io to see your task."
+        sms.deliver
+
+        # Send a simple email
+        msg = UserMailer.incorrect_choice_message(user_choice)
+        msg.deliver!
+      else
+        # Send a simple sms notificatin to initialize the feedback loop
+        sms = Sms.new
+        sms.to_user = user_choice.user
+        sms.content = "Congragulations! Your bet on #{bet.proposition} was correct. Wait for task verifications to show up on betly.io."
+        sms.deliver
+
+        # Send a simple email
+        msg = UserMailer.correct_choice_message(user_choice)
+        msg.deliver!
       end
     end
+
+    redirect_to bet
   end
 
   def agree
@@ -72,7 +96,7 @@ class BetsController < ApplicationController
     u = UserChoice.new(user_id: current_user.id, bet_id: @bet.id, choice: true)
     u.save
 
-    Send a simple sms notificatin to initialize the feedback loop
+    # Send a simple sms notificatin to initialize the feedback loop
     sms = Sms.new
     sms.to_user = @bet.owner
     sms.content = 'Someone agreed with your bet on betly.io!'

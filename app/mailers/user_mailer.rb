@@ -33,4 +33,20 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  def incorrect_choice_message(user_choice)
+    if user_choice and user_choice.bet and user_choice.user and user_choice.user.email
+      mail to: user_choice.user.email, subject: "Looks like you were unlucky!", body: "You were incorrect regarding #{user_choice.bet.proposition}. Time to own up and pay the task."
+    else
+      puts "Failed to send email due to missing email"
+    end
+  end
+
+  def correct_choice_message(user_choice)
+    if user_choice and user_choice.bet and user_choice.user and user_choice.user.email
+      mail to: user_choice.user.email, subject: "You've got some talent!", body: "You were right on regarding #{user_choice.bet.proposition}. Check out the verification photos online at betly.io"
+    else
+      puts "Failed to send email due to missing email"
+    end
+  end
+
 end

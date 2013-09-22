@@ -6,35 +6,41 @@
 / %a{ data: { bind: 'text: loser_task' } }
 
 / TODO:
-/ Only show bet options if before start date
 / Add 'complete' option which prompts if owner was correct or incorrect
 / Add file uploads for verification
 
-%table.bet
-  %tr
-    %td.agree-side
-      = link_to bet.owner do
-        = image_tag '/assets/default_user.jpg', class: 'img-thumbnail'
-      - if not bet.user_choice_for(current_user) and bet.betting_allowed
-        = link_to 'Agree', bet_agree_path(bet), method: :post, class: 'btn btn-success agreement-btn fullwidth'
-    %td
-      %p.vs VS
-      %p.proposition-main
-        %span.bolded= "#{bet.owner.username.capitalize} bets:"
-        = link_to bet.proposition, bet
-      %p.loser-task-main  
-        %span= "The loser has to: #{bet.loser_task}"
-    %td.disagree-side
-      -if bet.disagreeing_choices.empty? and not bet.user_choice_for(current_user) and bet.betting_allowed
-        = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'
-      - elsif bet.disagreeing_choices.present?
-        = link_to bet.disagreeing_choices.first.user do
+.row
+  %table.bet
+    %tr
+      %td.agree-side
+        = link_to bet.owner do
           = image_tag '/assets/default_user.jpg', class: 'img-thumbnail'
-
-        - if not bet.user_choice_for(current_user)
+        - if not bet.user_choice_for(current_user) and bet.betting_allowed
+          = link_to 'Agree', bet_agree_path(bet), method: :post, class: 'btn btn-success agreement-btn fullwidth'
+      %td
+        - if bet.outcome != nil
+          - if bet.outcome
+            %p.vs TRUE
+          - else
+            %p.vs FALSE
+        - else
+          %p.vs VS
+        %p.proposition-main
+          %span.bolded= "#{bet.owner.username.capitalize} bets:"
+          = link_to bet.proposition, bet
+        %p.loser-task-main  
+          %span= "The loser has to: #{bet.loser_task}"
+        - if bet.event_start
+          %p.cut-off
+            %span= "Betting ends #{bet.event_start}"
+      %td.disagree-side
+        -if bet.disagreeing_choices.empty? and not bet.user_choice_for(current_user) and bet.betting_allowed
+          = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'
+        - elsif bet.disagreeing_choices.present?
           = link_to bet.disagreeing_choices.first.user do
-            = image_tag '/assets/default_user.jpg', width: '200px', class: 'img-thumbnail'
-          - if not bet.user_choice_for(current_user) and bet.betting_allowed
+            = image_tag '/assets/default_user.jpg', class: 'img-thumbnail'
+
+          - if not bet.user_choice_for(current_user)  and bet.betting_allowed
             = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'
   / %tr
   /   %td

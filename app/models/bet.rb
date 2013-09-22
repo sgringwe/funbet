@@ -19,8 +19,14 @@ class Bet < ParseResource::Base
 		self.objectId
 	end
 
+	# Allow betting when (event_start not reached or not defined) and (outcome has not been decided yet)
 	def betting_allowed
-		Time.now < self.event_start
+		((not self.event_start.present?) or Time.now < self.event_start) and (not self.outcome.present?)
+	end
+
+	# Betting is finished when (event_start reached or not defined)
+	def betting_finished
+		((not self.event_start.present?) or Time.now > self.event_start)
 	end
 
 	def user_choice_for(user)
@@ -33,6 +39,10 @@ class Bet < ParseResource::Base
 
 	def disagreeing_choices
 		user_choices.where(choice: false)
+	end
+
+	def verified_choices
+		user_choices.where(choice: !self.outcome, has_delivered: true)
 	end
 
 	def users
