@@ -1,9 +1,5 @@
-.col-md-12
-  / - if @bets.present?
-  /   - @bets.each do |bet|
-  /     / Render bet
-  /     %p= bet.proposition
-  / - else
-  /   %p No bets yet!
-
-  = link_to 'Create a Bet', new_bet_path, class: 'btn btn-primary'
+- if !@bets.empty?
+  %p #{@bets.count}
+- else
+  %p No bets yet!
+= link_to 'Create a Bet', new_bet_path, class: 'btn btn-primary'
