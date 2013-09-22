@@ -1,8 +1,4 @@
 / Menu Horizontal
-%ul.menu
-  %li.current
-    = link_to 'Bets', bets_path
-
 .navbar.global-header.navbar-fixed-top.navbar-inverse
   .container{:data => { :dropdown => 'dropdown' }}
     - if current_user
@@ -14,7 +10,7 @@
         %span Betly.io
       .navbar-collapse.collapse.main-nav-collapse
         %ul.nav.navbar-nav
-          %li= link_to 'Bets', bets_path
+          %li= link_to 'Bets', root_path
           %li= link_to 'New Bet', new_bet_path
 
         %ul.nav.navbar-nav.pull-right.topmenu

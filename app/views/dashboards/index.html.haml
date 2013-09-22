@@ -1,5 +1,7 @@
 - if !@bets.empty?
-  %p #{@bets.count}
-- else
-  %p No bets yet!
-= link_to 'Create a Bet', new_bet_path, class: 'btn btn-primary'
+  - @bets.each do |bet|
+    = render 'bets/bet_partial', bet: bet
+    %div.divider
+
+%div
+  = link_to 'Create a Bet', new_bet_path, class: 'btn btn-primary'

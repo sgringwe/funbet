@@ -3,7 +3,9 @@ class DashboardsController < ApplicationController
   respond_to :html
 
   def index
-		@bets = Bet.where(user_id: current_user.id )
+    @bets = Bet.all
     respond_with(@bets)
+		# @bets = Bet.where(user_id: current_user.id )
+  #   respond_with(@bets)
   end
 end

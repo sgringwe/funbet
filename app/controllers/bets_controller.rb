@@ -4,8 +4,9 @@ class BetsController < ApplicationController
 	before_filter :authenticate_user!
 
   def index
-    @bets = Bet.all
-		respond_with(@bets)
+    # @bets = Bet.all
+		# respond_with(@bets)
+    redirect_to root_path
   end
 
   def show
