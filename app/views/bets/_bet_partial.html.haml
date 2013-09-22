@@ -10,9 +10,8 @@
     %td.agree-side
       = link_to bet.owner do
         = image_tag '/assets/default_user.jpg', width: '200px', class: 'img-thumbnail'
-      / - bet.user_choices.each do |user_choice|
-      /   - if user_choice.choice
-      /     %p= user_choice.user.username
+      - if not bet.user_choice_for(current_user)
+        = link_to 'Agree', bet_agree_path(bet), class: 'btn btn-success agreement-btn fullwidth'
     %td
       %p.vs VS
       %p.proposition-main
@@ -21,8 +20,9 @@
       %p.loser-task-main  
         %span= "The loser has to: #{bet.loser_task}"
     %td.disagree-side
-      -if bet.disagreeing_choices.empty?
-        %p= "CHALLENGE"
-      -else 
-        = link_to bet.disagreeing_choices[0].user do
+      -if bet.disagreeing_choices.empty? and not bet.user_choice_for(current_user)
+        = link_to 'Disagree', bet_disagree_path(bet), class: 'btn btn-danger agreement-btn fullwidth'
+      - elsif not bet.user_choice_for(current_user)
+        = link_to bet.disagreeing_choices.first.user do
           = image_tag '/assets/default_user.jpg', width: '200px', class: 'img-thumbnail'
+        = link_to 'Disagree', bet_disagree_path(bet), class: 'btn btn-danger agreement-btn fullwidth'

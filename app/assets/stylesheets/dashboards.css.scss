@@ -6,6 +6,10 @@
   width: 300px;
 }
 
+.fullwidth {
+  width: 100%;
+}
+
 .bolded {
   font-weight: bold;
 }
@@ -22,7 +26,12 @@
     width: 200px;
 
     img {
-      width: 180px;
+      width: 190px;
+    }
+
+    .agreement-btn {
+      width: 190px;
+      margin-top: 12px;
     }
   }
 

@@ -12,9 +12,9 @@ Funbet::Application.routes.draw do
   get 'register' => 'users#new', as: :register
 
   resources :bets do
-    post 'agree/:choice' => 'bets#agree', as: :agree
-    post 'disagree/:choice' => 'bets#disagree', as: :disagree
-    post 'complete/:choice' => 'bets#complete', as: :complete
+    post 'agree' => 'bets#agree', as: :agree
+    post 'disagree' => 'bets#disagree', as: :disagree
+    post 'complete' => 'bets#complete', as: :complete
   end
 
 end
