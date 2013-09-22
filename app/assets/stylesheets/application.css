@@ -30,3 +30,12 @@ div.navbar .navbar-brand, div.navbar li a{
     border-left: 1px solid #333;
     border-right: 1px solid #333;
 }
+
+.loss{
+    opacity: .3;
+}
+
+.loss:after{
+    content: "test";
+
+}
