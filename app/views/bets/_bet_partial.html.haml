@@ -20,11 +20,16 @@
       %td
         - if bet.outcome != nil
           - if bet.outcome
-            %p.vs TRUE
+            %p.vs #{bet.owner.username.capitalize} wins
           - else
-            %p.vs FALSE
+            %p.vs #{bet.disagreeing_choices.first.user.username.capitalize}
         - else
           %p.vs VS
+        - choice = bet.user_choice_for(current_user)
+        - if !(choice === nil)
+          - if choice.choice != bet.outcome && !(bet.outcome === nil)
+            %p You lost! 
+            = link_to 'Prove you followed through.', bet_verify_path(bet), method: :get
         %p.proposition-main
           %span.bolded= "#{bet.owner.username.capitalize} bets:"
           = link_to bet.proposition, bet

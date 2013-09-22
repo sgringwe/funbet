@@ -15,6 +15,8 @@ Funbet::Application.routes.draw do
     post 'agree' => 'bets#agree', as: :agree
     post 'disagree' => 'bets#disagree', as: :disagree
     post 'complete' => 'bets#complete', as: :complete
+    get 'verify' => 'bets#verify', as: :verify
+    put 'verify' => 'bets#upload_verification', as: :upload_verification
   end
 
 end

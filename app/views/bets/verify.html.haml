@@ -1,0 +1,6 @@
+Prove that you lived up to your end of the bet:
+
+= @bet.loser_task
+= form_for @bet, url: {action: "verify"}, class: 'form-horizontal' do |f|
+  = f.file_field :verification_file
+  = f.submit 'Upload', class: 'btn btn-primary'

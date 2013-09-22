@@ -128,4 +128,16 @@ class BetsController < ApplicationController
     redirect_to @bet
   end
 
+  def verify
+    @bet = Bet.find(params[:bet_id])
+    respond_with(@bet)
+  end
+
+  def upload_verification
+    bet = Bet.find(params[:bet_id])
+    @user_choice = UserChoice.where(bet_id: bet.id, user_id: current_user.id).first
+    @user_choice.verification_file = params[:bet][:verification_file]
+    @user_choice.save
+  end
+
 end
