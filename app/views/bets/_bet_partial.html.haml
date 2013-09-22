@@ -14,7 +14,7 @@
     %tr
       %td.agree-side
         = link_to bet.owner do
-          = image_tag '/assets/default_user.jpg', class: 'img-thumbnail'
+          = image_tag get_random_photo, class: 'img-thumbnail'
         - if not bet.user_choice_for(current_user) and bet.betting_allowed
           = link_to 'Agree', bet_agree_path(bet), method: :post, class: 'btn btn-success agreement-btn fullwidth'
       %td
@@ -46,7 +46,7 @@
           = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'
         - elsif bet.disagreeing_choices.present?
           = link_to bet.disagreeing_choices.first.user do
-            = image_tag '/assets/default_user.jpg', class: 'img-thumbnail'
+            = image_tag get_random_photo, class: 'img-thumbnail'
 
           - if not bet.user_choice_for(current_user)  and bet.betting_allowed
             = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'

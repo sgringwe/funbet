@@ -147,11 +147,11 @@ class BetsController < ApplicationController
       # Send a simple sms notificatin to initialize the feedback loop
       sms = Sms.new
       sms.to_user = user_choice.user
-      sms.content = "Hilarious! #{user_choice.user.username} has uploaded a photo executing his loser task. Check it out."
+      sms.content = "Hilarious! #{current_user.username} has uploaded a photo executing his loser task. Check it out."
       sms.deliver
 
       # Send a simple email
-      msg = UserMailer.verification_added_message(user_choice)
+      msg = UserMailer.verification_added_message(user_choice, current_user)
       msg.deliver!
     end
 

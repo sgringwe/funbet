@@ -14,5 +14,9 @@ class ApplicationController < ActionController::Base
 		session[:user_id] = @current_user.id
 	end
 
-  helper_method :current_user, :set_current_user
+  def get_random_photo
+    ['/assets/default_user.jpg'].sample
+  end
+
+  helper_method :current_user, :set_current_user, :get_random_photo
 end
