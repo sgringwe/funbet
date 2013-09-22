@@ -1,7 +1,7 @@
 class UserMailer < ActionMailer::Base
   include SendGrid
 
-  default from: 'bmchrist@mtu.edu'
+  default from: 'noreply@betly.io'
 
   sendgrid_category :use_subject_lines
   sendgrid_enable   :ganalytics, :opentrack

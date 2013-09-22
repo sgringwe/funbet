@@ -1,5 +1,5 @@
 class Bet < ParseResource::Base
-	fields :id, :loser_task, :outcome, :is_public, :proposition, :owner_id
+	fields :id, :loser_task, :outcome, :is_public, :proposition, :owner_id, :event_start
 
 	def convert_bools!
 		if self.outcome == '0'
@@ -17,6 +17,10 @@ class Bet < ParseResource::Base
 
 	def id
 		self.objectId
+	end
+
+	def betting_allowed
+		Time.now < self.event_start
 	end
 
 	def user_choice_for(user)

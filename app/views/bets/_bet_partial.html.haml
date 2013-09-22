@@ -5,12 +5,17 @@
 / %a{ data: { bind: 'text: challenge' } }
 / %a{ data: { bind: 'text: loser_task' } }
 
+/ TODO:
+/ Only show bet options if before start date
+/ Add 'complete' option which prompts if owner was correct or incorrect
+/ Add file uploads for verification
+
 %table.bet
   %tr
     %td.agree-side
       = link_to bet.owner do
         = image_tag '/assets/default_user.jpg', class: 'img-thumbnail'
-      - if not bet.user_choice_for(current_user)
+      - if not bet.user_choice_for(current_user) and bet.betting_allowed
         = link_to 'Agree', bet_agree_path(bet), method: :post, class: 'btn btn-success agreement-btn fullwidth'
     %td
       %p.vs VS
@@ -20,7 +25,7 @@
       %p.loser-task-main  
         %span= "The loser has to: #{bet.loser_task}"
     %td.disagree-side
-      -if bet.disagreeing_choices.empty? and not bet.user_choice_for(current_user)
+      -if bet.disagreeing_choices.empty? and not bet.user_choice_for(current_user) and bet.betting_allowed
         = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'
       - elsif bet.disagreeing_choices.present?
         = link_to bet.disagreeing_choices.first.user do
@@ -29,4 +34,8 @@
         - if not bet.user_choice_for(current_user)
           = link_to bet.disagreeing_choices.first.user do
             = image_tag '/assets/default_user.jpg', width: '200px', class: 'img-thumbnail'
-          = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'
+          - if not bet.user_choice_for(current_user) and bet.betting_allowed
+            = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'
+  / %tr
+  /   %td
+  /     = link_to ''

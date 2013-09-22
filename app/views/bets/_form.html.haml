@@ -7,5 +7,8 @@
     = f.text_area :loser_task, class: 'form-control width300', rows: 4, placeholder: 'Task that the user must do'
   .form-group
     = f.label :is_public, 'I want this bet to be public to anyone'
-    = f.check_box :is_public, class: 'form-control'
+    = f.check_box :is_public
+  .form-group
+    = f.label :event_start, 'Betting cutoff time. When bets are no longer allowed'
+    = f.datetime_select :event_start, class: 'form-control'
   = f.submit 'Bet', class: 'btn btn-primary'
