@@ -1,5 +1,0 @@
-<form action="users/new" method="POST">	Username: <input type="text" name="username"><br>
-		Password: <input type="password" name="pwd"><br>
-		<input type="submit" value="Submit">
-	</div>
-</form>
