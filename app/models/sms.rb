@@ -8,7 +8,7 @@ class Sms
     number_to_send_from = '+14247723859'
     number_to_send_to = to_user.try(:phone)
 
-    return if not number_to_send_to
+    return if number_to_send_to == nil or number_to_send_to.empty?
 
     account_sid = 'AC47c76664f1abd5b417c81c972acb2291'
     auth_token = '3b558c800bf5867786126749bddeee59'

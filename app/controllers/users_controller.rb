@@ -13,6 +13,13 @@ class UsersController < ApplicationController
 		respond_with(@user) # Edit user account
 	end
 
+	def update
+		@user = User.find(params[:id])
+		@user.update_attributes(params[:user])
+    @user.save
+    redirect_to bets_path
+	end
+
 	def create
 		if params[:user][:password] != params[:user][:password_confirmation]
 			flash[:error] = 'Passwords do not match'
