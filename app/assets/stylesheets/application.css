@@ -16,3 +16,17 @@
 body #main{
     font-family: serif;
 }
+
+div.navbar{
+    min-height: 25px;
+}
+
+div.navbar .navbar-brand, div.navbar li a{
+    padding-top:7px;
+    padding-bottom: 7px;
+}
+
+.navbar-brand{
+    border-left: 1px solid #333;
+    border-right: 1px solid #333;
+}
