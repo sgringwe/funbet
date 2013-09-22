@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 	respond_to :html
 
+	before_filter :authenticate_user!, only: :edit
+
 	def new
 		@user = User.new
 		respond_with(@user) # create a user
