@@ -1,6 +1,8 @@
 class Bet < ParseResource::Base
 	fields :id, :loser_task, :outcome, :is_public, :proposition, :owner_id, :event_start
 
+	attr_accessor :agreeing_choices, :disagreeing_choices, :verified_choices, :users, :user_choices, :owner
+
 	def convert_bools!
 		if self.outcome == '0'
 			self.outcome = false
@@ -34,26 +36,26 @@ class Bet < ParseResource::Base
 	end
 
 	def agreeing_choices
-		user_choices.where(choice: true)
+		@user_choices ||= user_choices.where(choice: true)
 	end
 
 	def disagreeing_choices
-		user_choices.where(choice: false)
+		@disagreeing_choices ||= user_choices.where(choice: false)
 	end
 
 	def verified_choices
-		user_choices.where(choice: !self.outcome, has_delivered: true)
+		@verified_choices ||= user_choices.where(choice: !self.outcome, has_delivered: true)
 	end
 
 	def users
-		user_choices.map { |uc| uc.user }
+		@users ||= user_choices.map { |uc| uc.user }
 	end
 
 	def user_choices
-		UserChoice.where(bet_id: self.id)
+		@user_choices ||= UserChoice.where(bet_id: self.id)
 	end
 
 	def owner
-		User.find(self.owner_id)
+		@owner ||= User.find(self.owner_id)
 	end
 end
