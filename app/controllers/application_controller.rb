@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     ['/assets/default_user.jpg','/assets/default_user2.jpg',
         '/assets/default_user3.jpg','/assets/default_user4.jpg',
         '/assets/default_user5.jpg','/assets/default_user6.jpg',
-        '/assets/default_user7.jpg'].sample
+        '/assets/default_user7.jpg','/assets/default_user8.jpg'].sample
   end
 
   helper_method :current_user, :set_current_user, :get_random_photo
