@@ -9,23 +9,26 @@
 / Add 'complete' option which prompts if owner was correct or incorrect
 / Add file uploads for verification
 
+- user_choice_for = bet.user_choice_for(current_user)
+- bet_owner = bet.owner
+- bet_disagreeing_choices = bet.disagreeing_choices
 .row
   %table.bet
     %tr
       %td.agree-side
-        = link_to bet.owner do
+        = link_to bet_owner do
           = image_tag get_random_photo, class: 'img-thumbnail'
-        - if not bet.user_choice_for(current_user) and bet.betting_allowed
+        - if not user_choice_for and bet.betting_allowed
           = link_to 'Agree', bet_agree_path(bet), method: :post, class: 'btn btn-success agreement-btn fullwidth'
       %td
         - if bet.outcome != nil
           - if bet.outcome
-            %p.vs #{bet.owner.username.capitalize} wins
+            %p.vs #{bet_owner.username.capitalize} wins
           - else
-            %p.vs #{bet.disagreeing_choices.first.user.username.capitalize}
+            %p.vs #{bet_disagreeing_choices.first.user.username.capitalize}
         - else
           %p.vs VS
-        - choice = bet.user_choice_for(current_user)
+        - choice = user_choice_for
         - if !(choice === nil)
           - if choice.choice != bet.outcome && !(bet.outcome === nil)
             %p You lost! 
@@ -34,7 +37,7 @@
           - elsif choice.choice == bet.outcome && !(bet.outcome === nil)
             %p You won!
         %p.proposition-main
-          %span.bolded= "#{bet.owner.username.capitalize} bets:"
+          %span.bolded= "#{bet_owner.username.capitalize} bets:"
           = link_to bet.proposition, bet
         %p.loser-task-main  
           %span= "The loser has to: #{bet.loser_task}"
@@ -42,13 +45,13 @@
           %p.cut-off
             %span= "Betting ends #{bet.event_start}"
       %td.disagree-side
-        -if bet.disagreeing_choices.empty? and not bet.user_choice_for(current_user) and bet.betting_allowed
+        -if bet_disagreeing_choices.empty? and not user_choice_for and bet.betting_allowed
           = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'
-        - elsif bet.disagreeing_choices.present?
-          = link_to bet.disagreeing_choices.first.user do
+        - elsif bet_disagreeing_choices.present?
+          = link_to bet_disagreeing_choices.first.user do
             = image_tag get_random_photo, class: 'img-thumbnail'
 
-          - if not bet.user_choice_for(current_user)  and bet.betting_allowed
+          - if not user_choice_for  and bet.betting_allowed
             = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'
   / %tr
   /   %td
