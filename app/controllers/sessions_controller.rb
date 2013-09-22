@@ -25,6 +25,9 @@ class SessionsController < ApplicationController
 			c = Curl::Easy.new(uri)
 			c.headers['X-Parse-Application-Id'] = '0iy7OGpbCzG28sXgOsHbPxEg8ifTKNUzSR4rshIz'
 			c.headers['X-Parse-REST-API-Key'] = 'x2qJ5VmWfR9vzmJRxVQjYhfNncd851N8aJxrapwQ'
+			if current_user
+				c.headers['X-Parse-Session-Token'] = current_user.attributes['sessionToken']
+			end
 			c.headers['Content-Type'] = 'application/json'
 			if current_user
 				c.http_post(obj.to_json)
