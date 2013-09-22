@@ -68,13 +68,39 @@ class BetsController < ApplicationController
   end
 
   def agree
+    @bet = Bet.find(params[:bet_id])
     u = UserChoice.new(user_id: current_user.id, bet_id: @bet.id, choice: true)
     u.save
+
+    Send a simple sms notificatin to initialize the feedback loop
+    sms = Sms.new
+    sms.to_user = @bet.owner
+    sms.content = 'Someone agreed with your bet on betly.io!'
+    sms.deliver
+
+    # Send a simple email
+    msg = UserMailer.new_gambler_message(u)
+    msg.deliver!
+
+    redirect_to @bet
   end
 
   def disagree
+    @bet = Bet.find(params[:bet_id])
     u = UserChoice.new(user_id: current_user.id, bet_id: @bet.id, choice: false)
     u.save
+
+    # Send a simple sms notificatin to initialize the feedback loop
+    sms = Sms.new
+    sms.to_user = @bet.owner
+    sms.content = 'Someone challenged you on betly.io!'
+    sms.deliver
+
+    # Send a simple email
+    msg = UserMailer.new_gambler_message(u)
+    msg.deliver!
+
+    redirect_to @bet
   end
 
 end

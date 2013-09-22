@@ -25,4 +25,12 @@ class UserMailer < ActionMailer::Base
     end
   end
 
+  def new_gambler_message(user_choice)
+    if user_choice and user_choice.bet and user_choice.bet and user_choice.bet.owner.email
+      mail to: user_choice.bet.owner.email, subject: "We have a new gambler!", body: 'Someone bet alongside you at betly.io. Come see if they agree or disagree.'
+    else
+      puts "Failed to send email due to missing email"
+    end
+  end
+
 end

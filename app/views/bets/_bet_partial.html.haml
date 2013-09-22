@@ -9,20 +9,24 @@
   %tr
     %td.agree-side
       = link_to bet.owner do
-        = image_tag '/assets/default_user.jpg', width: '200px', class: 'img-thumbnail'
+        = image_tag '/assets/default_user.jpg', class: 'img-thumbnail'
       - if not bet.user_choice_for(current_user)
-        = link_to 'Agree', bet_agree_path(bet), class: 'btn btn-success agreement-btn fullwidth'
+        = link_to 'Agree', bet_agree_path(bet), method: :post, class: 'btn btn-success agreement-btn fullwidth'
     %td
       %p.vs VS
       %p.proposition-main
         %span.bolded= "#{bet.owner.username.capitalize} bets:"
-        %span= bet.proposition
+        = link_to bet.proposition, bet
       %p.loser-task-main  
         %span= "The loser has to: #{bet.loser_task}"
     %td.disagree-side
       -if bet.disagreeing_choices.empty? and not bet.user_choice_for(current_user)
-        = link_to 'Disagree', bet_disagree_path(bet), class: 'btn btn-danger agreement-btn fullwidth'
-      - elsif not bet.user_choice_for(current_user)
+        = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'
+      - elsif bet.disagreeing_choices.present?
         = link_to bet.disagreeing_choices.first.user do
-          = image_tag '/assets/default_user.jpg', width: '200px', class: 'img-thumbnail'
-        = link_to 'Disagree', bet_disagree_path(bet), class: 'btn btn-danger agreement-btn fullwidth'
+          = image_tag '/assets/default_user.jpg', class: 'img-thumbnail'
+
+        - if not bet.user_choice_for(current_user)
+          = link_to bet.disagreeing_choices.first.user do
+            = image_tag '/assets/default_user.jpg', width: '200px', class: 'img-thumbnail'
+          = link_to 'Disagree', bet_disagree_path(bet), method: :post, class: 'btn btn-danger agreement-btn fullwidth'

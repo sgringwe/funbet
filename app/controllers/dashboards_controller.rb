@@ -4,6 +4,6 @@ class DashboardsController < ApplicationController
 
   def index
 		@bets = Bet.where(user_id: current_user.id )
-        respond_with(@bets)
+    respond_with(@bets)
   end
 end

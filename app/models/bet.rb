@@ -4,7 +4,7 @@ class Bet < ParseResource::Base
 	def convert_bools!
 		if self.outcome == '0'
 			self.outcome = false
-		else
+		elsif self.outcome == '1'
 			self.outcome = true
 		end
 
