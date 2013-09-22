@@ -143,7 +143,7 @@ class BetsController < ApplicationController
     s = @user_choice.save
 
     # Let everyone know
-    bet.user_choices.each do |user_choice|
+    @bet.user_choices.each do |user_choice|
       # Send a simple sms notificatin to initialize the feedback loop
       sms = Sms.new
       sms.to_user = user_choice.user
