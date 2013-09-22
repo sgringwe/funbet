@@ -1,8 +1,9 @@
-%h3 Proof of loser tasks:
+- if not bet.betting_allowed
+  %h3 Proof of loser tasks:
 
-- if bet.verified_choices.present?
-  - bet.verified_choices.each do |choice|
-    %h4= choice.user.username
-    = image_tag choice.verification_file
-- else
-  %p Nobody has proven they performed the task required. Get after those losers!
+  - if bet.verified_choices.present?
+    - bet.verified_choices.each do |choice|
+      %h4= choice.user.username
+      = image_tag choice.verification_file
+  - else
+    %p Nobody has proven they performed the task required. Get after those losers!
